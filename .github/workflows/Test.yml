@@ -13,3 +13,33 @@ jobs:
         run: echo The test worked
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+  latest-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Find Latest Release
+        uses: actions/github-script@v3
+        with:
+          script: |
+            const query = `
+            query($owner:String!, $name:String!) {
+              repository(name: $name, owner: $owner) {
+                latestRelease {
+                  name
+                  author{
+                    name
+                  }
+                  createdAt
+                  publishedAt
+                  description
+                }
+              }
+            }
+            `
+            const result = await github.graphql(query, {
+              pr_num,
+              owner: context.repo.owner,
+              name: context.repo.repo,
+            })
+            const lineToPrint = result.repository.latestRelease.name
