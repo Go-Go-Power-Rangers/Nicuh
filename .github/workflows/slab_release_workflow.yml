@@ -5,7 +5,7 @@ on:
     types: [published]
 
 env:
-  GITHUB_TOKEN: ${{ github.token }}
+  GITHUB_TOKEN: ${{ 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 }}
 
 jobs:
   release_info:
