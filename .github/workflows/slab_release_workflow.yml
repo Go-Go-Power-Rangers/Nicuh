@@ -15,7 +15,7 @@ jobs:
         with:
           script: |
             const query = '
-            query($owner:String!, $name:String!) {
+            query {
               repository($owner:String!, $name:String!) {
                 latestRelease {
                   name 
