@@ -4,12 +4,10 @@ on:
   release:
     types: [published]
 
-env:
-  GITHUB_TOKEN: ${{ github.token }}
-
 jobs:
-  upload-release:
+  print-username:
     runs-on: ubuntu-latest
+
     steps:
-      -name: Get latest release
-      run: echo it works
+      - name: Print to STDOUT
+        run: echo The test worked
