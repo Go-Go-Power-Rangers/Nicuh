@@ -38,7 +38,6 @@ jobs:
             }
             `
             const result = await github.graphql(query, {
-              pr_num,
               owner: context.repo.owner,
               name: context.repo.repo,
             })
