@@ -1,0 +1,15 @@
+name: Automation for release on slab
+
+on:
+  release:
+    types: [published]
+
+env:
+  GITHUB_TOKEN: ${{ github.token }}
+
+jobs:
+  upload-release:
+    runs-on: ubuntu-latest
+    steps:
+      -name: Get latest release
+      run: echo it works
