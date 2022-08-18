@@ -5,13 +5,13 @@ on:
     types: [published]
 
 env:
-  GITHUB_TOKEN: ${{ github.token }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   release_info:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/github-script@v6
+      - uses: actions/github-script@v3
         with:
           script: |
             const query = '
@@ -30,7 +30,7 @@ jobs:
             }
             '
             const result = await github.graphql(query, {
-              owner: 'Go-Go-Power-Rangers',
-              name: 'Nicuh',
+              owner: context.repo.owner,
+              name: context.repo.name,
             })
             console.log(result)
