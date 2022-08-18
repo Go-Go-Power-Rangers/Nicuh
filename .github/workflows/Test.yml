@@ -11,3 +11,5 @@ jobs:
     steps:
       - name: Print to STDOUT
         run: echo The test worked
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
