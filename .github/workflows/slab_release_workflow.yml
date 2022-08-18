@@ -1,0 +1,36 @@
+name: release on slab automation
+
+on:
+  release:
+    types: [published]
+
+env:
+  GITHUB_TOKEN: ${{ github.token }}
+
+jobs:
+  release_info:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            const query = '
+            query($owner:String!, $name:String!) {
+              repository($owner:String!, $name:String!) {
+                latestRelease {
+                  name 
+                  author {
+                    name
+                    }
+                  createdAt
+                  publishedAt
+                  description
+                }
+              }
+            }
+            '
+            const result = await github.graphql(query, {
+              owner: 'Go-Go-Power-Rangers',
+              name: 'Nicuh',
+            })
+            console.log(result)
