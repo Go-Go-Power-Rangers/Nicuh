@@ -51,4 +51,4 @@ jobs:
     
     steps:
       - name: Post to slab
-        run: echo "${{steps.release_info.outputs.result}}"
+        run: echo "${{needs.release_info.outputs.result}}"
