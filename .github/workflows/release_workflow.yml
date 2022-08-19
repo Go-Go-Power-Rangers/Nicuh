@@ -20,6 +20,7 @@ jobs:
     steps:
       - name: Find Latest Release
         uses: actions/github-script@v3
+        id: release_info
         with:
           script: |
             const query = `
@@ -49,4 +50,4 @@ jobs:
     
     steps:
       - name: Post to slab
-        run: echo "$steps.result"
+        run: echo "$steps.release_info.outputs.result"
