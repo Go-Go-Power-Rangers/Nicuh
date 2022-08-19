@@ -1,5 +1,4 @@
-name: Automation for release on slab
-
+name: Automation for release on slab v2
 on:
   release:
     types: [published]
@@ -52,4 +51,4 @@ jobs:
     
     steps:
       - name: Post to slab
-        run: echo "${{needs.release_info.outputs.result}}"
+        run: echo "${{needs.latest_release.release_info.outputs.result}}"
