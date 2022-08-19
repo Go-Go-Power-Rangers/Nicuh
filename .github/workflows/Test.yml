@@ -19,8 +19,10 @@ jobs:
     
     steps:
       - name: Find Latest Release
+        id: release
         uses: actions/github-script@v3
         with:
+          result-encoding: string
           script: |
             const query = `
             query($owner:String!, $name:String!) {
@@ -43,3 +45,7 @@ jobs:
             })
             const name = result.repository.latestRelease.name
             console.log(result)
+            return result
+      - name: Read result
+        run: echo "${{steps.release.outputs.result}}"
+            
