@@ -47,5 +47,5 @@ jobs:
             return result
           result-encoding: string
       - name: Read result
-        run: echo "${{steps.release.outputs.result}}"
+        run: echo "${{steps.release.outputs.result.repository.latestRelease.name}}"
             
