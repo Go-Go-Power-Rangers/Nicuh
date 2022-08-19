@@ -59,4 +59,8 @@ jobs:
         env:
           RELEASE: ${{steps.release.outputs.env}}
         run: |
-          curl -X POST -H "Authorization: ${{ secrets.SLAB_TOKEN }}" -H "Content-Type: application/json" -d '{"query":"query { topic(id: \"i46ml6yc\") { name } }"}' https://api.slab.com/v1/graphql
+          curl -X POST \
+          -H "Authorization: ${{ secrets.SLAB_TOKEN }}" \
+          -H "Content-Type: application/json" \
+          -d '{"query":"query { topic(id: \"i46ml6yc\") { name } }"}' \
+          https://api.slab.com/v1/graphql
