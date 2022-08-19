@@ -47,5 +47,11 @@ jobs:
             return result
           result-encoding: string
       - name: Read result
-        run: echo "${{steps.release.outputs.result.repository.latestRelease.name}}"
-            
+        env:
+          RELEASE: steps.release.outputs.result
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { RELEASE } = process.env
+            console.log(RELEASE)
+    
