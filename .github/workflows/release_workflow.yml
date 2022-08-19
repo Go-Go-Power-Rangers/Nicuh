@@ -1,0 +1,52 @@
+name: Automation for release on slab
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  print-username:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print to STDOUT
+        run: echo The test worked
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+  latest-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Find Latest Release
+        uses: actions/github-script@v3
+        with:
+          script: |
+            const query = `
+            query($owner:String!, $name:String!) {
+              repository(name: $name, owner: $owner) {
+                latestRelease {
+                  name
+                  author{
+                    name
+                  }
+                  createdAt
+                  publishedAt
+                  description
+                }
+              }
+            }
+            `
+            const result = await github.graphql(query, {
+              owner: context.repo.owner,
+              name: context.repo.repo,
+            })
+            console.log(result)
+  
+  slab_post:
+    needs: latest-release
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Post to slab
+        run: echo steps.result
