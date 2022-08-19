@@ -43,12 +43,7 @@ jobs:
               name: context.repo.repo,
             })
             console.log(result)
-      - run: echo "##[set-output name=info_result;]$(echo $release_info.result)"
-  
-  slab_post:
-    needs: latest-release
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Post to slab
-        run: echo "${{needs.release_info.outputs.info_result}}"
+      - run: echo "##[set-output name=info_result;]$result"
+      
+      - name: slab-post
+        run: echo "${{ steps.release_info.info_result }}"
