@@ -20,7 +20,7 @@ jobs:
     steps:
       - name: Find Latest Release
         id: release
-        uses: actions/github-script@v3
+        uses: actions/github-script@v6
         with:
           script: |
             const query = `
