@@ -8,7 +8,7 @@ jobs:
   print-username:
     runs-on: ubuntu-latest
     outputs:
-      output1: ${{ steps.release_info.outsputs.result }}
+      output1: ${{ steps.release_info.outsputs.info_result }}
 
     steps:
       - name: Print to STDOUT
@@ -45,7 +45,7 @@ jobs:
               name: context.repo.repo,
             })
             console.log(result)
-      - run: echo "::set-output name=release_info::$(result)"
+      - run: echo "::set-output name=info_result::$(result)"
   
   slab_post:
     needs: latest-release
@@ -53,4 +53,4 @@ jobs:
     
     steps:
       - name: Post to slab
-        run: echo "${{needs.latest_release.release_info.outputs.result}}"
+        run: echo "${{needs.latest_release.release_info.outputs.output1}}"
