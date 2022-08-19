@@ -47,8 +47,8 @@ jobs:
             console.log(result)
             return result
           result-encoding: string
-          - id: release_info
-            run: echo "::set-output name result::$result"
+          id: release_info
+          run: echo "::set-output name result::$result"
 
   
   slab_post:
