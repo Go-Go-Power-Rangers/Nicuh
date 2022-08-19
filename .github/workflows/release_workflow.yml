@@ -7,8 +7,6 @@ on:
 jobs:
   print-username:
     runs-on: ubuntu-latest
-    outputs:
-      output1: ${{ steps.release_info.outsputs.info_result }}
 
     steps:
       - name: Print to STDOUT
@@ -53,4 +51,4 @@ jobs:
     
     steps:
       - name: Post to slab
-        run: echo "${{needs.latest_release.outputs.output1}}"
+        run: echo "${{needs.release_info.outputs.info_result}}"
