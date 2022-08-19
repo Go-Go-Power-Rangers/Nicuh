@@ -5,7 +5,7 @@ on:
     types: [published]
 
 jobs:
-  print-username:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,15 +14,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
-  latest_release:
-    outputs:
-      info: ${{ steps.release_info.result }}
+  latest-release:
     runs-on: ubuntu-latest
     
     steps:
       - name: Find Latest Release
-        uses: actions/github-script@v3
-        
+        id: release
+        uses: actions/github-script@v6
         with:
           script: |
             const query = `
@@ -44,17 +42,27 @@ jobs:
               owner: context.repo.owner,
               name: context.repo.repo,
             })
+            const name = result.repository.latestRelease.name
             console.log(result)
             return result
-          result-encoding: string
-          id: release_info
-          run: echo "::set-output name=result::$result"
+            
+      - name: Read result
+        env:
+          RELEASE: ${{steps.release.outputs.result}}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { RELEASE } = process.env
+            console.log(RELEASE)
 
-  
-  slab_post:
-    needs: latest_release
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Post to slab
-        run: echo "${{needs.latest_release.outputs.info}}"
+      - name: Slab post
+        env:
+          RELEASE: ${{steps.release.outputs.env}}
+        run: |
+          response =curl -X POST \
+            -H '"Authorization: " ${{ secrets.SLAB_TOKEN }}' \
+            -H "Content-Type: application/json" \
+            -d '"query": query { topic(id:"i46ml6yc") { name } }' \
+          https://api.slab.com/v1/graphql
+
+          echo "response from curl= $response"
