@@ -43,6 +43,7 @@ jobs:
               name: context.repo.repo,
             })
             console.log(result)
+            echo "::set-output name=result::$(result)"
   
   slab_post:
     needs: latest-release
@@ -50,4 +51,4 @@ jobs:
     
     steps:
       - name: Post to slab
-        run: echo "${{steps.release_info.result}}"
+        run: echo "${{steps.release_info.outputs.result}}"
