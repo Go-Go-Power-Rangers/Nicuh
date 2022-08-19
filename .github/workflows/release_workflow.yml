@@ -15,12 +15,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
   latest_release:
+    outputs:
+      info: ${{ steps.release_info.result }}
     runs-on: ubuntu-latest
     
     steps:
       - name: Find Latest Release
         uses: actions/github-script@v3
-        id: release_info
+        
         with:
           script: |
             const query = `
@@ -45,6 +47,9 @@ jobs:
             console.log(result)
             return result
           result-encoding: string
+          - id: release_info
+            run: echo "::set-output name result::$result"
+
   
   slab_post:
     needs: latest_release
@@ -52,4 +57,4 @@ jobs:
     
     steps:
       - name: Post to slab
-        run: echo "${{needs.latest_release.steps.release_info.outputs.result}}"
+        run: echo "${{needs.latest_release.outputs.info}}"
