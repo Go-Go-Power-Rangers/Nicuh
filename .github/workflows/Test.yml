@@ -44,8 +44,8 @@ jobs:
             })
             const name = result.repository.latestRelease.name
             console.log(result)
-            return result.repository.latestRelease.name
-          result-encoding: string
+            return result
+            
       - name: Read result
         env:
           RELEASE: ${{steps.release.outputs.result}}
