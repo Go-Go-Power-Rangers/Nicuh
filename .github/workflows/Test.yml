@@ -63,7 +63,7 @@ jobs:
           method: 'POST'
           customHeaders: '{"Content-Type": "application/json", "Authorization": "${{ secrets.SLAB_TOKEN }}"}'
           data: |
-            '{"query": " mutation { createPost(topicId: ${{secrets.SECRET_TOPICID}}) {title, id}}"
+            '{"query": " mutation { createPost(topicId: ${{secrets.SECRET_TOPICID}}) {title, id}}"}'
       
       - name: Show Response
         run: |
