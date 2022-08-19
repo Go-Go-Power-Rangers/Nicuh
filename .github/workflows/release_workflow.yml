@@ -1,4 +1,5 @@
 name: Automation for release on slab v2
+
 on:
   release:
     types: [published]
@@ -14,6 +15,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
   latest-release:
+    id: latest_release
     runs-on: ubuntu-latest
     
     steps:
