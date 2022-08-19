@@ -47,9 +47,11 @@ jobs:
             return result
           result-encoding: string
       - name: Read result
+        env:
+          RELEASE: ${{steps.release.outputs.result}}
         uses: actions/github-script@v6
         with:
           script: |
-            const { RELEASE } = process.steps.release.outputs.result
+            const { RELEASE } = process.env
             console.log(RELEASE)
     
