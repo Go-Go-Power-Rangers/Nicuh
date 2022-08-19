@@ -54,4 +54,20 @@ jobs:
           script: |
             const { RELEASE } = process.env
             console.log(RELEASE)
+            
+      - name: post on slab
+        id: myRequest
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: https://api.slab.com/v1/graphql
+          method: 'POST'
+          customHeaders: '{"Content-Type": "application/json", "Authorization": "${{ secret.SLAB_TOKEN }}"}'
+          data: |
+            '{"query": " mutation { createPost(topicId: ${{secret.SECRET_TOPICID}}) {title, id}}"
+      
+      - name: Show Response
+        run: |
+          echo ${{ steps.myRequest.outputs.response }}
+          echo ${{ steps.myRequest.outputs.headers }}
+          echo ${{ fromJson(steps.myRequest.outputs.response).title }}
     
