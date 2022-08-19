@@ -5,7 +5,7 @@ on:
     types: [published]
 
 jobs:
-  print-username:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -41,5 +41,5 @@ jobs:
               owner: context.repo.owner,
               name: context.repo.repo,
             })
-            const lineToPrint = result.repository.latestRelease.name
-            console.log(lineToPrint)
+            const name = result.repository.latestRelease.name
+            console.log(result)
