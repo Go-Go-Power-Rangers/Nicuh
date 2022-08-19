@@ -1,4 +1,4 @@
-name: Automation for release on slab
+name: Automation for release on slab v2
 
 on:
   release:
@@ -49,4 +49,4 @@ jobs:
     
     steps:
       - name: Post to slab
-        run: echo steps.result
+        run: echo "$steps.result"
