@@ -43,7 +43,7 @@ jobs:
               name: context.repo.repo,
             })
             console.log(result)
-      - run: echo "::set-output name=info_result::$result"
+      - run: echo "##[set-output name=info_result]$(echo $result)"
   
   slab_post:
     needs: latest-release
