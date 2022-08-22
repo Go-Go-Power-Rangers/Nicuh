@@ -5,9 +5,3 @@ Her er en liste med de ting jeg synes er fede:
  - Computer
  - Scooter
  - En Tutor
-
-Godt.
-
-haha
-
-pspispspsipsipsipso
