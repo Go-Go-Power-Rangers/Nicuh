@@ -1,7 +1,7 @@
 name: 'try without dockerfile'
 on:
   release:
-    types: [published]
+    types: [released]
 
 jobs:
   test_with_parameters:
