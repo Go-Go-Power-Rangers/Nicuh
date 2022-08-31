@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: szenius/set-timezone@v1.0
         with:
-          timezoneLinux: "CET"
+          timezoneLinux: "Europe/Denmark"
       - uses: actions/checkout@v2
         with:
           repository: 'Go-Go-Power-Rangers/slab-action-v2'
