@@ -7,6 +7,9 @@ jobs:
   test_with_parameters:
     runs-on: ubuntu-latest
     steps:
+      - uses: szenius/set-timezone@v1.0
+        with:
+          timezoneLinux: "CET"
       - uses: actions/checkout@v2
         with:
           repository: 'Go-Go-Power-Rangers/slab-action-v2'
